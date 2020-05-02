@@ -12,7 +12,7 @@
 * MongoDB
 * Typescript
 
-Models: 
+# Models
 * User
 * Task
-* 
+

@@ -1,32 +1,7 @@
-import { ApolloServer, gql } from "apollo-server";
+import { ApolloServer } from "apollo-server";
 
-const tasks = [
-  {
-    done: false,
-    name: "Faire les courses",
-  },
-  {
-    done: true,
-    name: "Faire la vaisselle",
-  },
-];
-
-const typeDefs = gql`
-  type Task {
-    done: Boolean
-    name: String
-  }
-
-  type Query {
-    tasks: [Task]
-  }
-`;
-
-const resolvers = {
-  Query: {
-    tasks: () => tasks,
-  },
-};
+import typeDefs from "./graphql/typeDefs";
+import resolvers from "./graphql/resolvers";
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
