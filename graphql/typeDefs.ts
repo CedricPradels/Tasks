@@ -15,10 +15,16 @@ export default gql`
     token: String
   }
 
+  type Signin {
+    isLogged: Boolean
+    token: String
+  }
+
   # QUERY TYPES
   type Query {
     doneTasks: [Task]
     todoTasks: [Task]
+    signin(email: String, password: String): Signin
   }
 
   # MUTATION TYPES
@@ -26,5 +32,6 @@ export default gql`
     createTask(name: String): Task
     deleteTask(id: ID): Task
     updateTask(id: ID): Task
+    signup(email: String, password: String): User
   }
 `;

@@ -7,4 +7,4 @@ const UserSchema = new mongoose.Schema({
   token: { type: String, required: true },
 });
 
-export default mongoose.model("Task", UserSchema);
+export default mongoose.model("User", UserSchema);
