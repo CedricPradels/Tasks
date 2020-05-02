@@ -2,6 +2,7 @@ import { gql } from "apollo-server";
 
 export default gql`
   # OBJECT TYPES
+  "Type of tasks"
   type Task {
     id: ID
     done: Boolean
@@ -16,11 +17,14 @@ export default gql`
 
   # QUERY TYPES
   type Query {
-    tasks: [Task]
+    doneTasks: [Task]
+    todoTasks: [Task]
   }
 
   # MUTATION TYPES
   type Mutation {
     createTask(name: String): Task
+    deleteTask(id: ID): Task
+    updateTask(id: ID): Task
   }
 `;

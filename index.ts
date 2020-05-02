@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 mongoose.connect("mongodb://localhost:27017/tasks", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 mongoose.connection.once("open", () => console.log("DB connected"));
 
