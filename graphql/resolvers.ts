@@ -19,7 +19,7 @@ export default {
       const totoTasks = await Task.find({ user: _id, done: true });
       return totoTasks;
     },
-    async signin(_, { email, password }) {
+    async login(_, { email, password }) {
       const { hash, token, salt } = await User.findOne({ email }).lean(true);
       const isLogged = checkPassword(password, hash, salt);
       return { isLogged, token: isLogged ? token : null };
@@ -49,7 +49,7 @@ export default {
       ).populate("user");
       return updatedTask;
     },
-    async signup(_, { email, password }) {
+    async register(_, { email, password }) {
       const authentication = generateAuthentication(password);
       const newUser = await User.create({ ...authentication, email });
       return newUser;
