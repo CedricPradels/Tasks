@@ -16,15 +16,28 @@ export default {
     },
     async todoTasks(_, { token }) {
       const { _id } = await User.findOne({ token }).lean(true);
-      const totoTasks = await Task.find({ user: _id, done: true });
+      const totoTasks = await Task.find({ user: _id, done: false });
       return totoTasks;
     },
     async login(_, { email, password }) {
-      const { hash, token, salt } = await User.findOne({ email }).lean(true);
-      const isLogged = checkPassword(password, hash, salt);
-      return { isLogged, token: isLogged ? token : null };
+      const userQuery = await User.findOne({ email }).lean(true);
+      if (userQuery === null) {
+        return null;
+      } else {
+        const { hash, token, salt } = userQuery;
+        const isLogged = checkPassword(password, hash, salt);
+        if (!isLogged) {
+          return null;
+        }
+        return { token, email: userQuery.email };
+      }
+    },
+    async getEmail(_, { token }) {
+      const { email } = await User.findOne({ token }).lean(true);
+      return email ? email : null;
     },
   },
+
   Mutation: {
     async createTask(_, { name, token }) {
       const { _id: user } = await User.findOne({ token }).lean({ token });

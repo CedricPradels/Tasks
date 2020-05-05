@@ -21,6 +21,7 @@ export default gql`
     doneTasks(token: String): [Task]
     todoTasks(token: String): [Task]
     login(email: String, password: String): User
+    getEmail(token: String): String
   }
 
   # MUTATION TYPES
